@@ -1,0 +1,58 @@
+{
+  "name": "ts-strictify",
+  "version": "0.0.0",
+  "description": "Enable gradual TypeScript strict",
+  "keywords": [
+    "typescript",
+    "strict"
+  ],
+  "license": "MIT",
+  "author": "Christian Schröter <dev@cschroeter.net> (https://cschroeter.net)",
+  "main": "dist/main.js",
+  "bin": "dist/main.js",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cschroeter/typescript-stricter.git"
+  },
+  "scripts": {
+    "start": "rollup -cw",
+    "build": "rollup -c",
+    "test": "jest",
+    "release": "release-it"
+  },
+  "dependencies": {
+    "execa": "^2.0.4",
+    "simple-git": "^1.126.0"
+  },
+  "peerDependencies": {
+    "typescript": "^3.6.3"
+  },
+  "devDependencies": {
+    "@babel/core": "7.6.2",
+    "@babel/preset-env": "7.6.2",
+    "@babel/preset-typescript": "7.6.0",
+    "@types/jest": "24.0.18",
+    "@typescript-eslint/eslint-plugin": "2.3.1",
+    "@typescript-eslint/parser": "2.3.1",
+    "eslint": "6.4.0",
+    "eslint-config-prettier": "6.3.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "husky": "3.0.5",
+    "jest": "24.9.0",
+    "prettier": "1.18.2",
+    "pretty-quick": "1.11.1",
+    "release-it": "12.4.1",
+    "rollup": "1.21.4",
+    "rollup-plugin-hashbang": "2.2.2",
+    "rollup-plugin-typescript2": "0.24.2",
+    "typescript": "3.6.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
