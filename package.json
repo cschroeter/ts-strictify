@@ -8,8 +8,8 @@
   ],
   "license": "MIT",
   "author": "Christian Schröter <dev@cschroeter.net> (https://cschroeter.net)",
-  "main": "dist/main.js",
-  "bin": "dist/main.js",
+  "main": "dist/bin.js",
+  "bin": "dist/bin.js",
   "files": [
     "dist"
   ],

@@ -4,7 +4,7 @@ import pkg from './package.json'
 
 export default [
   {
-    input: 'src/main.ts',
+    input: 'src/bin.ts',
     output: [{ file: pkg.main, format: 'cjs' }],
     external: ['simple-git/promise', 'execa'],
     plugins: [typescript(), hashbang()],
