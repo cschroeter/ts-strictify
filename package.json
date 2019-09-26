@@ -24,6 +24,7 @@
     "release": "release-it"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
     "execa": "^2.0.4",
     "simple-git": "^1.126.0"
   },

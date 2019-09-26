@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import simpleGit from 'simple-git/promise'
 import execa from 'execa'
 
@@ -43,11 +42,15 @@ const countStrictTypeScriptErrors = async (fileNames: string[]): Promise<number>
   }
 }
 
-const main = async (): Promise<void> => {
-  const [a, b] = await Promise.all([findModifiedAndUntrackedFiles(), findFilesFromDiffToMaster()])
-  const fileNames = [...new Set([...a, ...b])]
-  const errorCount = await countStrictTypeScriptErrors(fileNames)
-  errorCount ? process.exit(1) : process.exit(0)
+interface Args {
+  onFoundSinceRevision: (revision: string) => void
+  onFoundChangedFiles: (changedFiles: string[]) => void
+  onExamineFile: (file: string) => void
+  onCheckFile: (file: string, hasErrors: boolean) => void
 }
 
-main()
+export const strictify = async (args: Args): Promise<number> => {
+  const [a, b] = await Promise.all([findModifiedAndUntrackedFiles(), findFilesFromDiffToMaster()])
+  const fileNames = [...new Set([...a, ...b])]
+  return await countStrictTypeScriptErrors(fileNames)
+}
