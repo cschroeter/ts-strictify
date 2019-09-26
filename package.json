@@ -28,7 +28,7 @@
     "simple-git": "^1.126.0"
   },
   "peerDependencies": {
-    "typescript": "^3.6.3"
+    "typescript": "3.x"
   },
   "devDependencies": {
     "@babel/core": "7.6.2",
