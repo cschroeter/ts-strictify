@@ -1,8 +1,6 @@
-# `ts-strictify`
+# ts-strictify
 
-> Get Strict - eventually
-
-Runs [TypeScript](hhttp://www.typescriptlang.org/) in strict mode on your changed files.
+> Runs [TypeScript](hhttp://www.typescriptlang.org/) in strict mode on your changed files.
 
 ![Demo](./docs/assets/preview.png)
 
@@ -12,9 +10,7 @@ When you start working on a new feature or fixing a bug, you will modify the cod
 
 That is different than TypeScript works. You could check a single file against the compiler, but the compiler would also look up the imports and the imports of the imports. Not exactly what you want, when you are looking for incrementally update path.
 
-Supported source control managers:
-
-- Git
+Head over to https://cschroeter.net/moving-to-strict-typescript/ for more insights.
 
 ## Install
 
@@ -66,5 +62,9 @@ In `package.json`, add:
   }
 }
 ```
+
+## Supported SCM
+
+- Git
 
 <!-- ## CLI Flags -->
