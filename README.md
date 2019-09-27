@@ -4,6 +4,14 @@
 
 Runs [TypeScript](hhttp://www.typescriptlang.org/) in strict mode on your changed files.
 
+![Demo](./docs/assets/preview.png)
+
+## How it works
+
+When you start working on a new feature or fixing a bug, you will modify the code base in one way or another. `ts-strictify` will take a look at these changes - and only these changes (!) and will complain, if the files you have touched are not strict compliant.
+
+That is different than TypeScript works. You could check a single file against the compiler, but the compiler would also look up the imports and the imports of the imports. Not exactly what you want, when you are looking for incrementally update path.
+
 Supported source control managers:
 
 - Git
