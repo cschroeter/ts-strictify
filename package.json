@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/cschroeter/typescript-stricter.git"
+    "url": "https://github.com/cschroeter/ts-strictify.git"
   },
   "scripts": {
     "start": "rollup -cw",
