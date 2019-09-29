@@ -1,6 +1,5 @@
 import simpleGit from 'simple-git/promise'
 import execa from 'execa'
-import { file } from '@babel/types'
 
 const isSupportedExtension = (fileName: string): boolean => Boolean(fileName.match(/\.tsx?/))
 
@@ -33,10 +32,14 @@ const findChangedFiles = async (revision: string): Promise<string[]> => {
   return [...new Set([...a, ...b])].filter(isSupportedExtension)
 }
 
-const getTypeScriptCompileOutput = async (): Promise<string[]> => {
+const getTypeScriptCompileOutput = async (options: TypeScriptOptions): Promise<string[]> => {
+  const args = Object.entries(options)
+    .map(([key, value]) => [key.replace(/^/, '--'), value])
+    .reduce<string[]>((result, [key, value]) => [...result, key, value], [])
+
   let tscOutput: string[] = []
   try {
-    await execa('tsc', ['--strict', 'true'])
+    await execa('tsc', args)
   } catch (error) {
     const { all } = error
     tscOutput = (all as string).split('\n')
@@ -44,7 +47,19 @@ const getTypeScriptCompileOutput = async (): Promise<string[]> => {
   return tscOutput
 }
 
+export interface TypeScriptOptions {
+  noImplicitAny: boolean
+  noImplicitThis: boolean
+  alwaysStrict: boolean
+  strictBindCallApply: boolean
+  strictNullChecks: boolean
+  strictFunctionTypes: boolean
+  strictPropertyInitialization: boolean
+  noEmit: boolean
+}
+
 interface Args {
+  typeScriptOptions: TypeScriptOptions
   onFoundSinceRevision: (revision: string) => void
   onFoundChangedFiles: (changedFiles: string[]) => void
   onExamineFile: (file: string) => void
@@ -57,7 +72,7 @@ interface StrictifyResult {
 }
 
 export const strictify = async (args: Args): Promise<StrictifyResult> => {
-  const { onFoundSinceRevision, onFoundChangedFiles, onCheckFile } = args
+  const { onFoundSinceRevision, onFoundChangedFiles, onCheckFile, typeScriptOptions } = args
 
   const revision = await findWhereCommitForkedFromMaster()
   onFoundSinceRevision(revision)
@@ -65,7 +80,7 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
   const changedFiles = await findChangedFiles(revision)
   onFoundChangedFiles(changedFiles)
 
-  const tscOut = await getTypeScriptCompileOutput()
+  const tscOut = await getTypeScriptCompileOutput(typeScriptOptions)
 
   const errorCount = changedFiles.reduce<number>((totalErrorCount, fileName) => {
     let errorCount = 0

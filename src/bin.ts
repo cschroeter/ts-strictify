@@ -1,9 +1,33 @@
 #!/usr/bin/env node
 import chalk from 'chalk'
-import { strictify } from './main'
+import yargs from 'yargs'
+import { strictify, TypeScriptOptions } from './main'
 
 const run = async (): Promise<void> => {
+  const argv = yargs
+    .options({
+      noImplicitAny: { type: 'boolean', default: true },
+      noImplicitThis: { type: 'boolean', default: true },
+      alwaysStrict: { type: 'boolean', default: true },
+      strictBindCallApply: { type: 'boolean', default: true },
+      strictNullChecks: { type: 'boolean', default: true },
+      strictFunctionTypes: { type: 'boolean', default: true },
+      strictPropertyInitialization: { type: 'boolean', default: true },
+      noEmit: { type: 'boolean', default: true },
+    })
+    .parserConfiguration({
+      'strip-dashed': true,
+    }).argv
+
+  const typeScriptOptions = Object.entries(argv)
+    .filter(([_, value]) => typeof value === 'boolean')
+    .reduce<TypeScriptOptions>(
+      (options, [key, value]) => Object.assign({ ...options, [key]: value }),
+      {} as TypeScriptOptions,
+    )
+
   const result = await strictify({
+    typeScriptOptions,
     onFoundSinceRevision: (revision) => {
       console.log(
         `🔍  Finding changed files since ${chalk.bold('git')} revision ${chalk.bold(revision)}`,

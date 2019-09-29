@@ -34,6 +34,14 @@ With `yarn`:
 yarn ts-strictify
 ```
 
+You also can disable a compiler flags. E.g. if you want to disable `strictNullChecks`
+
+```shellsession
+yarn ts-strictify --strictNullChecks false
+```
+
+Below you will find all options.
+
 With [`npx`](https://npm.im/npx):
 
 ```shellsession
@@ -63,8 +71,20 @@ In `package.json`, add:
 }
 ```
 
+## Options
+
+```
+Options:
+  --noImplicitAny                   [boolean] [default: true]
+  --noImplicitThis                  [boolean] [default: true]
+  --alwaysStrict                    [boolean] [default: true]
+  --strictBindCallApply             [boolean] [default: true]
+  --strictNullChecks                [boolean] [default: true]
+  --strictFunctionTypes             [boolean] [default: true]
+  --strictPropertyInitialization    [boolean] [default: true]
+  --noEmit                          [boolean] [default: true]
+```
+
 ## Supported SCM
 
 - Git
-
-<!-- ## CLI Flags -->

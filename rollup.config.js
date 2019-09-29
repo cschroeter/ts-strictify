@@ -6,7 +6,7 @@ export default [
   {
     input: 'src/bin.ts',
     output: [{ file: pkg.main, format: 'cjs' }],
-    external: ['simple-git/promise', 'execa'],
+    external: ['simple-git/promise', 'execa', 'yargs', 'chalk'],
     plugins: [typescript(), hashbang()],
   },
 ]

@@ -26,7 +26,8 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "execa": "^2.0.4",
-    "simple-git": "^1.126.0"
+    "simple-git": "^1.126.0",
+    "yargs": "^14.0.0"
   },
   "peerDependencies": {
     "typescript": "3.x"
@@ -36,6 +37,7 @@
     "@babel/preset-env": "7.6.2",
     "@babel/preset-typescript": "7.6.0",
     "@types/jest": "24.0.18",
+    "@types/yargs": "13.0.3",
     "@typescript-eslint/eslint-plugin": "2.3.1",
     "@typescript-eslint/parser": "2.3.1",
     "eslint": "6.4.0",
