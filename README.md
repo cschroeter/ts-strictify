@@ -34,13 +34,13 @@ With `yarn`:
 yarn ts-strictify
 ```
 
-You also can disable a compiler flags. E.g. if you want to disable `strictNullChecks`
+You can also disable a compiler flag, for example you want to disable `strictNullChecks`
 
 ```shellsession
 yarn ts-strictify --strictNullChecks false
 ```
 
-Below you will find all options.
+You can find a list of all available options [`here`](#options).
 
 With [`npx`](https://npm.im/npx):
 
