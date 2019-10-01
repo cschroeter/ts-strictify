@@ -80,6 +80,10 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
   const changedFiles = await findChangedFiles(revision)
   onFoundChangedFiles(changedFiles)
 
+  if (changedFiles.length === 0) {
+    return { success: true, errors: 0 }
+  }
+
   const tscOut = await getTypeScriptCompileOutput(typeScriptOptions)
 
   const errorCount = changedFiles.reduce<number>((totalErrorCount, fileName) => {
