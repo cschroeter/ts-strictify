@@ -9,6 +9,9 @@
   "license": "MIT",
   "author": "Christian Schröter <dev@cschroeter.net> (https://cschroeter.net)",
   "bin": "./dist/bin.js",
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=8.10.0"
   },
