@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "chalk": "^2.4.2",
-    "execa": "^2.0.4",
+    "execa": "^2.1.0",
     "simple-git": "^1.126.0",
-    "yargs": "^14.0.0"
+    "yargs": "^14.2.0"
   },
   "peerDependencies": {
     "typescript": "3.x"
@@ -34,15 +34,15 @@
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
     "@types/yargs": "13.0.3",
-    "@typescript-eslint/eslint-plugin": "2.3.1",
-    "@typescript-eslint/parser": "2.3.1",
-    "eslint": "6.4.0",
-    "eslint-config-prettier": "6.3.0",
+    "@typescript-eslint/eslint-plugin": "2.3.3",
+    "@typescript-eslint/parser": "2.3.3",
+    "eslint": "6.5.1",
+    "eslint-config-prettier": "6.4.0",
     "eslint-plugin-prettier": "3.1.1",
-    "husky": "3.0.5",
+    "husky": "3.0.8",
     "prettier": "1.18.2",
     "pretty-quick": "1.11.1",
-    "release-it": "12.4.1",
+    "release-it": "12.4.3",
     "typescript": "3.6.3"
   },
   "husky": {
