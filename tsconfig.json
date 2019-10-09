@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
-    "noEmit": true
-  }
+    "target": "es2017",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
 }
