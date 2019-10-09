@@ -73,16 +73,19 @@ In `package.json`, add:
 
 ## Options
 
-```
+```bash
 Options:
-  --noImplicitAny                   [boolean] [default: true]
-  --noImplicitThis                  [boolean] [default: true]
-  --alwaysStrict                    [boolean] [default: true]
-  --strictBindCallApply             [boolean] [default: true]
-  --strictNullChecks                [boolean] [default: true]
-  --strictFunctionTypes             [boolean] [default: true]
-  --strictPropertyInitialization    [boolean] [default: true]
-  --noEmit                          [boolean] [default: true]
+  --help                          Show help                            [boolean]
+  --version                       Show version number                  [boolean]
+  --noImplicitAny                                      [boolean] [default: true]
+  --noImplicitThis                                     [boolean] [default: true]
+  --alwaysStrict                                       [boolean] [default: true]
+  --strictBindCallApply                                [boolean] [default: true]
+  --strictNullChecks                                   [boolean] [default: true]
+  --strictFunctionTypes                                [boolean] [default: true]
+  --strictPropertyInitialization                       [boolean] [default: true]
+  --noEmit                                             [boolean] [default: true]
+  --targetBranch                                    [string] [default: "master"]
 ```
 
 ## Supported SCM

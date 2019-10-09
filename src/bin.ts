@@ -14,6 +14,7 @@ const run = async (): Promise<void> => {
       strictFunctionTypes: { type: 'boolean', default: true },
       strictPropertyInitialization: { type: 'boolean', default: true },
       noEmit: { type: 'boolean', default: true },
+      targetBranch: { type: 'string', default: 'master' },
     })
     .parserConfiguration({
       'strip-dashed': true,
@@ -26,12 +27,21 @@ const run = async (): Promise<void> => {
       {} as TypeScriptOptions,
     )
 
+  const { targetBranch } = argv
+
   const result = await strictify({
+    targetBranch,
     typeScriptOptions,
     onFoundSinceRevision: (revision) => {
-      console.log(
-        `🔍  Finding changed files since ${chalk.bold('git')} revision ${chalk.bold(revision)}`,
-      )
+      revision
+        ? console.log(
+            `🔍  Finding changed files since ${chalk.bold('git')} revision ${chalk.bold(revision)}`,
+          )
+        : console.log(
+            `⚠️  Can not find commit at which the current branch was forked from ${chalk.bold(
+              targetBranch,
+            )}. Does target branch ${chalk.bold(targetBranch)} exists?`,
+          )
     },
     onFoundChangedFiles: (changedFiles) => {
       console.log(

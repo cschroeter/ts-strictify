@@ -3,33 +3,34 @@ import execa from 'execa'
 
 const isSupportedExtension = (fileName: string): boolean => Boolean(fileName.match(/\.tsx?$/))
 
-const findWhereCommitForkedFromMaster = async (): Promise<string> => {
-  const { stdout } = await execa('git', ['merge-base', '--fork-point', 'master'])
-  return stdout
+const findCommitAtWhichTheCurrentBranchForkedFromTargetBranch = async (
+  targetBranch: string,
+): Promise<string | undefined> => {
+  return execa('git', ['merge-base', '--fork-point', targetBranch])
+    .then((resposne) => resposne.stdout)
+    .catch(() => undefined)
 }
 
 const findModifiedAndUntrackedFiles = async (): Promise<string[]> => {
-  const { created, modified, not_added } = await simpleGit().status()
-  return [...created, ...modified, ...not_added]
-}
-
-const findFilesFromDiffToRevision = async (revision: string): Promise<string[]> => {
   return simpleGit()
-    .diffSummary([revision])
-    .then(({ files }) => files.reduce((result, { file }) => [...result, file], [] as string[]))
+    .status()
+    .then(({ created, modified, not_added }) => [...created, ...modified, ...not_added])
     .catch((e) => {
-      console.error('Can not find files that changed compared to master', e)
+      console.warn('Can not find modified and untracked files', e)
       return []
     })
 }
 
-const findChangedFiles = async (revision: string): Promise<string[]> => {
-  const [a, b] = await Promise.all([
-    findModifiedAndUntrackedFiles(),
-    findFilesFromDiffToRevision(revision),
-  ])
-
-  return Array.from(new Set([...a, ...b])).filter(isSupportedExtension)
+const findFilesFromDiffToRevision = async (revision?: string): Promise<string[]> => {
+  return revision
+    ? simpleGit()
+        .diffSummary([revision])
+        .then(({ files }) => files.reduce((result, { file }) => [...result, file], [] as string[]))
+        .catch((e) => {
+          console.error('Can not find files that changed compared to master', e)
+          return []
+        })
+    : []
 }
 
 const getTypeScriptCompileOutput = async (options: TypeScriptOptions): Promise<string[]> => {
@@ -60,7 +61,8 @@ export interface TypeScriptOptions {
 
 interface Args {
   typeScriptOptions: TypeScriptOptions
-  onFoundSinceRevision: (revision: string) => void
+  targetBranch: string
+  onFoundSinceRevision: (revision: string | undefined) => void
   onFoundChangedFiles: (changedFiles: string[]) => void
   onExamineFile: (file: string) => void
   onCheckFile: (file: string, hasErrors: boolean) => void
@@ -72,12 +74,21 @@ interface StrictifyResult {
 }
 
 export const strictify = async (args: Args): Promise<StrictifyResult> => {
-  const { onFoundSinceRevision, onFoundChangedFiles, onCheckFile, typeScriptOptions } = args
+  const {
+    onFoundSinceRevision,
+    onFoundChangedFiles,
+    onCheckFile,
+    typeScriptOptions,
+    targetBranch,
+  } = args
 
-  const revision = await findWhereCommitForkedFromMaster()
-  onFoundSinceRevision(revision)
+  const commit = await findCommitAtWhichTheCurrentBranchForkedFromTargetBranch(targetBranch)
+  onFoundSinceRevision(commit)
 
-  const changedFiles = await findChangedFiles(revision)
+  const changedFiles = await Promise.all([
+    findModifiedAndUntrackedFiles(),
+    findFilesFromDiffToRevision(commit),
+  ]).then(([a, b]) => Array.from(new Set([...a, ...b])).filter(isSupportedExtension))
   onFoundChangedFiles(changedFiles)
 
   if (changedFiles.length === 0) {
