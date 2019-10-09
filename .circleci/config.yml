@@ -1,10 +1,16 @@
-version: 2.1
+version: 2
 jobs:
   release:
     docker:
-      - image: circleci/node:8
+      - image: 'circleci/node8'
     steps:
       - checkout
-      - run: yarn
-      - run: yarn build
-      # - run: npx semantic-release
+      - run:
+          name: install
+          command: yarn install
+      - run:
+          name: build
+          command: yarn build
+      # - run:
+      #     name: release
+      #     command: yarn release || true
