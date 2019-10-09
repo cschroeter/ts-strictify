@@ -1,0 +1,10 @@
+version: 2.1
+jobs:
+  release:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn build
+      # - run: npx semantic-release
