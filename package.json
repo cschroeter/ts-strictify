@@ -1,6 +1,6 @@
 {
   "name": "ts-strictify",
-  "version": "0.6.0-development",
+  "version": "1.0.0",
   "description": "Enable gradual TypeScript strict",
   "keywords": [
     "typescript",
