@@ -1,8 +1,8 @@
 version: 2
 jobs:
-  release:
+  build:
     docker:
-      - image: 'circleci/node8'
+      - image: circleci/node:8
     steps:
       - checkout
       - run:
