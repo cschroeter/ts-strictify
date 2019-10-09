@@ -29,7 +29,7 @@ const findChangedFiles = async (revision: string): Promise<string[]> => {
     findFilesFromDiffToRevision(revision),
   ])
 
-  return [...new Set([...a, ...b])].filter(isSupportedExtension)
+  return Array.from(new Set([...a, ...b])).filter(isSupportedExtension)
 }
 
 const getTypeScriptCompileOutput = async (options: TypeScriptOptions): Promise<string[]> => {
