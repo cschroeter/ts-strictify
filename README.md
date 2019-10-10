@@ -89,6 +89,7 @@ Options:
   --strictFunctionTypes                                [boolean] [default: true]
   --strictPropertyInitialization                       [boolean] [default: true]
   --noEmit                                             [boolean] [default: true]
+  --excludeFilesFixedOnBranch                              [array] [default: []]
   --targetBranch                                    [string] [default: "master"]
 ```
 

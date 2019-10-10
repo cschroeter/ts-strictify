@@ -14,6 +14,7 @@ const run = async (): Promise<void> => {
       strictFunctionTypes: { type: 'boolean', default: true },
       strictPropertyInitialization: { type: 'boolean', default: true },
       noEmit: { type: 'boolean', default: true },
+      excludeFilesFixedOnBranch: { type: 'array', default: [] },
       targetBranch: { type: 'string', default: 'master' },
     })
     .parserConfiguration({
@@ -27,11 +28,19 @@ const run = async (): Promise<void> => {
       {} as TypeScriptOptions,
     )
 
-  const { targetBranch } = argv
+  const { targetBranch, excludeFilesFixedOnBranch } = argv
 
   const result = await strictify({
     targetBranch,
+    excludeFilesFixedOnBranch,
     typeScriptOptions,
+    onBranchNotFound: (notFoundBranches) => {
+      console.log(
+        notFoundBranches
+          .map((branch) => `⚠️  Can not find branch ${chalk.bold(branch)}`)
+          .join('\n'),
+      )
+    },
     onFoundSinceRevision: (revision) => {
       revision
         ? console.log(
@@ -40,14 +49,17 @@ const run = async (): Promise<void> => {
         : console.log(
             `⚠️  Can not find commit at which the current branch was forked from ${chalk.bold(
               targetBranch,
-            )}. Does target branch ${chalk.bold(targetBranch)} exists?`,
+            )}. Does target branch ${chalk.bold(targetBranch)} exist?`,
           )
     },
-    onFoundChangedFiles: (changedFiles) => {
+    onFoundChangedFiles: (includedFiles, excludedFiles) => {
+      const numberOfExcludedFiles = excludedFiles.length
+      const numberOfChangedFiles = includedFiles.length + numberOfExcludedFiles
+      const excluded = numberOfExcludedFiles > 0 ? ` (${numberOfExcludedFiles} excluded) ` : ''
       console.log(
-        `🎯  Found ${chalk.bold(String(changedFiles.length))} changed ${
-          changedFiles.length === 1 ? 'file' : 'files'
-        }`,
+        `🎯  Found ${chalk.bold(String(numberOfChangedFiles))} changed ${
+          numberOfChangedFiles === 1 ? 'file' : 'files'
+        }${excluded}`,
       )
     },
     onExamineFile: (file) => {
