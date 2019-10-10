@@ -4,6 +4,10 @@
 
 ![Demo](./docs/assets/preview.png)
 
+## Background
+
+TBD
+
 ## How it works
 
 When you start working on a new feature or fixing a bug, you will modify the code base in one way or another. `ts-strictify` will take a look at these changes - and only these changes (!) and will complain, if the files you have touched are not strict compliant.
