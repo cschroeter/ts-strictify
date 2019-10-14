@@ -15,6 +15,7 @@ const run = async (): Promise<void> => {
       strictPropertyInitialization: { type: 'boolean', default: true },
       noEmit: { type: 'boolean', default: true },
       targetBranch: { type: 'string', default: 'master' },
+      stagedOnly: { type: 'boolean', default: false },
     })
     .parserConfiguration({
       'strip-dashed': true,
@@ -27,9 +28,10 @@ const run = async (): Promise<void> => {
       {} as TypeScriptOptions,
     )
 
-  const { targetBranch } = argv
+  const { targetBranch, stagedOnly } = argv
 
   const result = await strictify({
+    stagedOnly,
     targetBranch,
     typeScriptOptions,
     onFoundSinceRevision: (revision) => {

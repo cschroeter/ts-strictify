@@ -21,6 +21,16 @@ const findModifiedAndUntrackedFiles = async (): Promise<string[]> => {
     })
 }
 
+const findStagedFiles = async (): Promise<string[]> => {
+  return simpleGit()
+    .status()
+    .then(({ staged }) => staged)
+    .catch((e) => {
+      console.warn('Can not find staged files', e)
+      return []
+    })
+}
+
 const findFilesFromDiffToRevision = async (revision?: string): Promise<string[]> => {
   return revision
     ? simpleGit()
@@ -61,6 +71,7 @@ export interface TypeScriptOptions {
 
 interface Args {
   typeScriptOptions: TypeScriptOptions
+  stagedOnly: boolean
   targetBranch: string
   onFoundSinceRevision: (revision: string | undefined) => void
   onFoundChangedFiles: (changedFiles: string[]) => void
@@ -80,15 +91,18 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
     onCheckFile,
     typeScriptOptions,
     targetBranch,
+    stagedOnly,
   } = args
 
-  const commit = await findCommitAtWhichTheCurrentBranchForkedFromTargetBranch(targetBranch)
-  onFoundSinceRevision(commit)
-
-  const changedFiles = await Promise.all([
-    findModifiedAndUntrackedFiles(),
-    findFilesFromDiffToRevision(commit),
-  ]).then(([a, b]) => Array.from(new Set([...a, ...b])).filter(isSupportedExtension))
+  const changedFiles = stagedOnly
+    ? await findStagedFiles()
+    : await Promise.all([
+        findCommitAtWhichTheCurrentBranchForkedFromTargetBranch(targetBranch).then((commit) => {
+          onFoundSinceRevision(commit)
+          return findFilesFromDiffToRevision(commit)
+        }),
+        findModifiedAndUntrackedFiles(),
+      ]).then(([a, b]) => Array.from(new Set([...a, ...b])).filter(isSupportedExtension))
   onFoundChangedFiles(changedFiles)
 
   if (changedFiles.length === 0) {
