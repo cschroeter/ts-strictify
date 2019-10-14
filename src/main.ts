@@ -96,15 +96,18 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
     stagedOnly,
   } = args
 
-  const changedFiles = stagedOnly
-    ? await findStagedFiles()
-    : await Promise.all([
-        findCommitAtWhichTheCurrentBranchForkedFromTargetBranch(targetBranch).then((commit) => {
-          onFoundSinceRevision(commit)
-          return findFilesFromDiffToRevision(commit)
-        }),
-        findModifiedAndUntrackedFiles(),
-      ]).then(([a, b]) => Array.from(new Set([...a, ...b])).filter(isSupportedExtension))
+  const changedFiles = await Promise.all(
+    stagedOnly
+      ? [findStagedFiles()]
+      : [
+          findCommitAtWhichTheCurrentBranchForkedFromTargetBranch(targetBranch).then((commit) => {
+            onFoundSinceRevision(commit)
+            return findFilesFromDiffToRevision(commit)
+          }),
+          findModifiedAndUntrackedFiles(),
+        ],
+  ).then(([a, b]) => Array.from(new Set([...a, ...b])).filter(isSupportedExtension))
+
   onFoundChangedFiles(changedFiles)
 
   if (changedFiles.length === 0) {
