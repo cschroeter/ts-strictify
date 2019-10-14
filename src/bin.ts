@@ -22,10 +22,10 @@ const run = async (): Promise<void> => {
     }).argv
 
   const typeScriptOptions = Object.entries(argv)
-    .filter(([_, value]) => typeof value === 'boolean')
-    .reduce<TypeScriptOptions>(
+    .filter(([key, _value]) => key in TypeScriptOptions)
+    .reduce<Record<TypeScriptOptions, boolean>>(
       (options, [key, value]) => Object.assign({ ...options, [key]: value }),
-      {} as TypeScriptOptions,
+      {} as Record<TypeScriptOptions, boolean>,
     )
 
   const { targetBranch, stagedOnly } = argv

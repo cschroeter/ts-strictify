@@ -43,10 +43,12 @@ const findFilesFromDiffToRevision = async (revision?: string): Promise<string[]>
     : []
 }
 
-const getTypeScriptCompileOutput = async (options: TypeScriptOptions): Promise<string[]> => {
+const getTypeScriptCompileOutput = async (
+  options: Record<TypeScriptOptions, boolean>,
+): Promise<string[]> => {
   const args = Object.entries(options)
-    .map(([key, value]) => [key.replace(/^/, '--'), value])
-    .reduce<string[]>((result, [key, value]) => [...result, key, value], [])
+    .map(([key, value]): [string, boolean] => [key.replace(/^/, '--'), value])
+    .reduce<string[]>((result, [key, value]) => [...result, key, value.toString()], [])
 
   let tscOutput: string[] = []
   try {
@@ -58,19 +60,19 @@ const getTypeScriptCompileOutput = async (options: TypeScriptOptions): Promise<s
   return tscOutput
 }
 
-export interface TypeScriptOptions {
-  noImplicitAny: boolean
-  noImplicitThis: boolean
-  alwaysStrict: boolean
-  strictBindCallApply: boolean
-  strictNullChecks: boolean
-  strictFunctionTypes: boolean
-  strictPropertyInitialization: boolean
-  noEmit: boolean
+export enum TypeScriptOptions {
+  noImplicitAny = 'noImplicitAny',
+  noImplicitThis = 'noImplicitThis',
+  alwaysStrict = 'alwaysStrict',
+  strictBindCallApply = 'strictBindCallApply',
+  strictNullChecks = 'strictNullChecks',
+  strictFunctionTypes = 'strictFunctionTypes',
+  strictPropertyInitialization = 'strictPropertyInitialization',
+  noEmit = 'noEmit',
 }
 
 interface Args {
-  typeScriptOptions: TypeScriptOptions
+  typeScriptOptions: Record<TypeScriptOptions, boolean>
   stagedOnly: boolean
   targetBranch: string
   onFoundSinceRevision: (revision: string | undefined) => void
