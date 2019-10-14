@@ -15,7 +15,7 @@ const run = async (): Promise<void> => {
       strictPropertyInitialization: { type: 'boolean', default: true },
       noEmit: { type: 'boolean', default: true },
       targetBranch: { type: 'string', default: 'master' },
-      stagedOnly: { type: 'boolean', default: false },
+      stagedOnly: { type: 'boolean', default: false, describe: 'ignores targetBranch' },
     })
     .parserConfiguration({
       'strip-dashed': true,

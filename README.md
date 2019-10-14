@@ -90,6 +90,7 @@ Options:
   --strictPropertyInitialization                       [boolean] [default: true]
   --noEmit                                             [boolean] [default: true]
   --targetBranch                                    [string] [default: "master"]
+  --stagedOnly                 (ignores targetBranch) [boolean] [default: false]
 ```
 
 ## Supported SCM
