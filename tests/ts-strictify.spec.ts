@@ -22,6 +22,8 @@ test('files are detected correctly', async () => {
 
   await git
     .init()
+    .then(() => git.addConfig('user.name', 'Some One'))
+    .then(() => git.addConfig('user.email', 'some@one.com'))
     .then(() => copy(join(__dirname, 'repository'), path))
     .then(() => git.add('./*'))
     .then(() => git.commit('First commit'))
