@@ -1,3 +1,17 @@
+# [1.2.0](https://github.com/cschroeter/ts-strictify/compare/v1.1.0...v1.2.0) (2019-10-15)
+
+
+### Bug Fixes
+
+* **tests:** set global git config ([3453da2](https://github.com/cschroeter/ts-strictify/commit/3453da283d6b81f56e20b5d336c2eae36b22e4fa))
+
+
+### Features
+
+* **packages:** udpate dependencies ([2d4f871](https://github.com/cschroeter/ts-strictify/commit/2d4f871226dce05f706c12ed657743bc08b05f0c))
+* **tests:** add test setup ([a5b41b4](https://github.com/cschroeter/ts-strictify/commit/a5b41b4202aa54d1ee1609142047b9d30ffb49df))
+* **tests:** add test setup ([82643fe](https://github.com/cschroeter/ts-strictify/commit/82643fe3ffd3d2c6710560f98484506afac9c5a4))
+
 # [1.1.0](https://github.com/cschroeter/ts-strictify/compare/v1.0.1...v1.1.0) (2019-10-11)
 
 
