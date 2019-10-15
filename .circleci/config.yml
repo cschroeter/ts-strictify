@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10.16.3
     steps:
       - checkout
       - run:
@@ -12,5 +12,8 @@ jobs:
           name: build
           command: yarn build
       - run:
+          name: test
+          command: yarn test
+      - run:
           name: release
-          command: yarn release || true
+          command: yarn release

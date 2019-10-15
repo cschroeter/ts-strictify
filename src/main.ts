@@ -40,7 +40,7 @@ const getTypeScriptCompileOutput = async (options: TypeScriptOptions): Promise<s
 
   let tscOutput: string[] = []
   try {
-    await execa('tsc', args)
+    await execa('tsc', args, { all: true })
   } catch (error) {
     const { all } = error
     tscOutput = (all as string).split('\n')
