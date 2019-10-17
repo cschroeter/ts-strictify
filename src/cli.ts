@@ -16,18 +16,11 @@ const run = async (): Promise<void> => {
       strictPropertyInitialization: { type: 'boolean', default: true },
       noEmit: { type: 'boolean', default: true },
       targetBranch: { type: 'string', default: 'master' },
-      commited: { type: 'boolean', default: true },
-      staged: {
-        type: 'boolean',
-        default: true,
-        description: 'will check files in the "staged" area',
-      },
-      modified: { type: 'boolean', default: true },
-      untracked: {
-        type: 'boolean',
-        default: true,
-        description: 'will check files that are not tracked',
-      },
+      commitedFiles: { type: 'boolean', default: true },
+      stagedFiles: { type: 'boolean', default: true },
+      modifiedFiles: { type: 'boolean', default: true },
+      untrackedFiles: { type: 'boolean', default: true },
+      createdFiles: { type: 'boolean', default: true },
     })
     .parserConfiguration({
       'strip-dashed': true,
@@ -44,7 +37,14 @@ const run = async (): Promise<void> => {
     'noEmit',
   ])
 
-  const gitOptions = pick(argv, ['commited', 'staged', 'modified', 'untracked', 'targetBranch'])
+  const gitOptions = pick(argv, [
+    'commitedFiles',
+    'stagedFiles',
+    'modifiedFiles',
+    'untrackedFiles',
+    'createdFiles',
+    'targetBranch',
+  ])
 
   const result = await strictify({
     gitOptions,
