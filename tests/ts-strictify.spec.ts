@@ -6,7 +6,7 @@ import { copy, outputFile } from 'fs-extra'
 
 const runTsStrictifyInPath = async (path: string): Promise<string> => {
   const cwd = process.cwd()
-  const tsStrictify = join(cwd, 'dist/bin.js')
+  const tsStrictify = join(cwd, 'dist/cli.js')
 
   process.chdir(path)
   return execa('node', [tsStrictify])
@@ -29,6 +29,7 @@ test('files are detected correctly', async () => {
     .then(() => git.commit('First commit'))
     .then(() => runTsStrictifyInPath(path))
     .then((stdout) => expect(stdout).toMatch(/Found 0 changed file/))
+    .catch((e) => console.log(e))
 
   await git
     .checkoutLocalBranch('feature')

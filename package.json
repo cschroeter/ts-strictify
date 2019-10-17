@@ -8,7 +8,7 @@
   ],
   "license": "MIT",
   "author": "Christian Schröter <dev@cschroeter.net> (https://cschroeter.net)",
-  "bin": "./dist/bin.js",
+  "bin": "./dist/cli.js",
   "files": [
     "dist"
   ],
@@ -22,12 +22,13 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc",
-    "test": "CI=true jest",
+    "test": "jest",
     "release": "semantic-release"
   },
   "dependencies": {
     "chalk": "^3.0.0",
     "execa": "^4.0.0",
+    "lodash": "4.17.15",
     "simple-git": "^1.131.0",
     "yargs": "^15.1.0"
   },
@@ -47,6 +48,7 @@
     "@semantic-release/release-notes-generator": "9.0.0",
     "@types/fs-extra": "8.0.1",
     "@types/jest": "25.1.2",
+    "@types/lodash": "4.14.149",
     "@types/yargs": "15.0.3",
     "@typescript-eslint/eslint-plugin": "2.19.0",
     "@typescript-eslint/parser": "2.19.0",

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import chalk from 'chalk'
 import yargs from 'yargs'
-import { strictify, TypeScriptOptions } from './main'
+import { pick } from 'lodash'
+import { strictify } from './ts-strictify'
 
 const run = async (): Promise<void> => {
   const argv = yargs
@@ -15,22 +16,38 @@ const run = async (): Promise<void> => {
       strictPropertyInitialization: { type: 'boolean', default: true },
       noEmit: { type: 'boolean', default: true },
       targetBranch: { type: 'string', default: 'master' },
+      commited: { type: 'boolean', default: true },
+      staged: {
+        type: 'boolean',
+        default: true,
+        description: 'will check files in the "staged" area',
+      },
+      modified: { type: 'boolean', default: true },
+      untracked: {
+        type: 'boolean',
+        default: true,
+        description: 'will check files that are not tracked',
+      },
     })
     .parserConfiguration({
       'strip-dashed': true,
     }).argv
 
-  const typeScriptOptions = Object.entries(argv)
-    .filter(([_, value]) => typeof value === 'boolean')
-    .reduce<TypeScriptOptions>(
-      (options, [key, value]) => Object.assign({ ...options, [key]: value }),
-      {} as TypeScriptOptions,
-    )
+  const typeScriptOptions = pick(argv, [
+    'noImplicitAny',
+    'noImplicitThis',
+    'alwaysStrict',
+    'strictBindCallApply',
+    'strictNullChecks',
+    'strictFunctionTypes',
+    'strictPropertyInitialization',
+    'noEmit',
+  ])
 
-  const { targetBranch } = argv
+  const gitOptions = pick(argv, ['commited', 'staged', 'modified', 'untracked', 'targetBranch'])
 
   const result = await strictify({
-    targetBranch,
+    gitOptions,
     typeScriptOptions,
     onFoundSinceRevision: (revision) => {
       revision
@@ -39,8 +56,8 @@ const run = async (): Promise<void> => {
           )
         : console.log(
             `⚠️  Can not find commit at which the current branch was forked from ${chalk.bold(
-              targetBranch,
-            )}. Does target branch ${chalk.bold(targetBranch)} exists?`,
+              gitOptions.targetBranch,
+            )}. Does target branch ${chalk.bold(gitOptions.targetBranch)} exists?`,
           )
     },
     onFoundChangedFiles: (changedFiles) => {
