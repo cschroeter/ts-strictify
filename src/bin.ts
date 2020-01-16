@@ -8,6 +8,7 @@ const run = async (): Promise<void> => {
     .options({
       noImplicitAny: { type: 'boolean', default: true },
       noImplicitThis: { type: 'boolean', default: true },
+      noImplicitUseStrict: { type: 'boolean', default: false },
       alwaysStrict: { type: 'boolean', default: true },
       strictBindCallApply: { type: 'boolean', default: true },
       strictNullChecks: { type: 'boolean', default: true },
