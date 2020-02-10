@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/cschroeter/ts-strictify/compare/v1.2.0...v1.3.0) (2020-02-10)
+
+
+### Features
+
+* **packages:** update dependencies ([066b120](https://github.com/cschroeter/ts-strictify/commit/066b120ce479a964ef9e248dd7433978a526b9c6))
+
 # [1.2.0](https://github.com/cschroeter/ts-strictify/compare/v1.1.0...v1.2.0) (2019-10-15)
 
 
