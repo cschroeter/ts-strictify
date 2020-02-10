@@ -79,17 +79,22 @@ In `package.json`, add:
 
 ```bash
 Options:
-  --help                          Show help                            [boolean]
-  --version                       Show version number                  [boolean]
-  --noImplicitAny                                      [boolean] [default: true]
-  --noImplicitThis                                     [boolean] [default: true]
-  --alwaysStrict                                       [boolean] [default: true]
-  --strictBindCallApply                                [boolean] [default: true]
-  --strictNullChecks                                   [boolean] [default: true]
-  --strictFunctionTypes                                [boolean] [default: true]
-  --strictPropertyInitialization                       [boolean] [default: true]
-  --noEmit                                             [boolean] [default: true]
-  --targetBranch                                    [string] [default: "master"]
+  --help                          Show help                       [boolean]
+  --version                       Show version number             [boolean]
+  --noImplicitAny                                 [boolean] [default: true]
+  --noImplicitThis                                [boolean] [default: true]
+  --alwaysStrict                                  [boolean] [default: true]
+  --strictBindCallApply                           [boolean] [default: true]
+  --strictNullChecks                              [boolean] [default: true]
+  --strictFunctionTypes                           [boolean] [default: true]
+  --strictPropertyInitialization                  [boolean] [default: true]
+  --noEmit                                        [boolean] [default: true]
+  --targetBranch                               [string] [default: "master"]
+  --commitedFiles                                 [boolean] [default: true]
+  --stagedFiles                                   [boolean] [default: true]
+  --modifiedFiles                                 [boolean] [default: true]
+  --untrackedFiles                                [boolean] [default: true]
+  --createdFiles                                  [boolean] [default: true]
 ```
 
 ## Supported SCM
