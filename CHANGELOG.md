@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/cschroeter/ts-strictify/compare/v1.4.0...v1.4.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* trigger another build ([8100a84](https://github.com/cschroeter/ts-strictify/commit/8100a844843dcf0cc19d78c54ec5dc27c4e4e5f0))
+
 # [1.4.0](https://github.com/cschroeter/ts-strictify/compare/v1.3.0...v1.4.0) (2020-02-10)
 
 
