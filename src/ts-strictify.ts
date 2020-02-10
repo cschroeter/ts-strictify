@@ -37,6 +37,7 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
   const changedFiles = await findChangedFiles(gitOptions).then((files) =>
     files.filter((fileName) => Boolean(fileName.match(/\.tsx?$/))),
   )
+
   onFoundChangedFiles(changedFiles)
 
   if (changedFiles.length === 0) {
