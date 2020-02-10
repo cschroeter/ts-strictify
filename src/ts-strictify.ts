@@ -44,7 +44,6 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
   }
 
   const tscOut = await compile(typeScriptOptions)
-
   const errorCount = changedFiles.reduce<number>((totalErrorCount, fileName) => {
     let errorCount = 0
     tscOut.map((line) => {
