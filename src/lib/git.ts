@@ -1,6 +1,7 @@
 import execa from 'execa'
 import simpleGit from 'simple-git/promise'
 import { isEmpty, split } from 'lodash'
+import { join } from 'path'
 
 export interface GitOptions {
   targetBranch: string
@@ -19,6 +20,12 @@ export const findCommitAtWhichTheCurrentBranchForkedFromTargetBranch = async (
     .catch(() => undefined)
 }
 
+export const findGitRootDir = async (): Promise<string> => {
+  return await execa('git', ['rev-parse', '--show-toplevel'])
+    .then((resposne) => resposne.stdout)
+    .catch(() => '')
+}
+
 export const findChangedFiles = async (options: GitOptions): Promise<string[]> => {
   const {
     untrackedFiles,
@@ -30,6 +37,8 @@ export const findChangedFiles = async (options: GitOptions): Promise<string[]> =
   } = options
 
   const status = await simpleGit().status()
+  const gitRootDir = await findGitRootDir()
+
   const commited = await simpleGit()
     .diff([`${targetBranch}...`, '--name-only'])
     .then((diff) => split(diff, '\n').filter((fileName) => !isEmpty(fileName)))
@@ -42,5 +51,5 @@ export const findChangedFiles = async (options: GitOptions): Promise<string[]> =
       ...(stagedFiles ? status.staged : []),
       ...(commitedFiles ? commited : []),
     ]),
-  )
+  ).map((fileName) => join(gitRootDir, fileName))
 }
