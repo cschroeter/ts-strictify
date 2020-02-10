@@ -3,6 +3,15 @@
 
 ### Features
 
+* resolve files located in submodules correctly ([cf54c2e](https://github.com/cschroeter/ts-strictify/commit/cf54c2eab3f22ec6a65904162fb97b851ffbe5d3))
+* **file-detection:** add various options to detect files ([9a695e5](https://github.com/cschroeter/ts-strictify/commit/9a695e5bd99225373e0dde0f3c9476aab18347b9))
+* **file-detection:** improve file detection ([be42919](https://github.com/cschroeter/ts-strictify/commit/be42919a807fec1991495fe4fdd3a70999cadaee))
+
+# [1.4.0](https://github.com/cschroeter/ts-strictify/compare/v1.3.0...v1.4.0) (2020-02-10)
+
+
+### Features
+
 * **file-detection:** add various options to detect files ([9a695e5](https://github.com/cschroeter/ts-strictify/commit/9a695e5bd99225373e0dde0f3c9476aab18347b9))
 * **file-detection:** improve file detection ([be42919](https://github.com/cschroeter/ts-strictify/commit/be42919a807fec1991495fe4fdd3a70999cadaee))
 
