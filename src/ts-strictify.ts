@@ -4,6 +4,7 @@ import {
   findCommitAtWhichTheCurrentBranchForkedFromTargetBranch,
 } from './lib/git'
 import { TypeScriptOptions, compile } from './lib/typescript'
+import { relative } from 'path'
 
 export interface Args {
   typeScriptOptions: TypeScriptOptions
@@ -47,7 +48,7 @@ export const strictify = async (args: Args): Promise<StrictifyResult> => {
   const errorCount = changedFiles.reduce<number>((totalErrorCount, fileName) => {
     let errorCount = 0
     tscOut.map((line) => {
-      if (line.includes(fileName)) {
+      if (line.includes(relative(process.cwd(), fileName))) {
         errorCount === 0 ? onCheckFile(fileName, true) : null
         totalErrorCount++
         errorCount++
