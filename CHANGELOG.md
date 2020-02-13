@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/cschroeter/ts-strictify/compare/v1.4.1...v1.5.0) (2020-02-13)
+
+
+### Features
+
+* exit with code 1 if target branch does not exist ([ddf9da2](https://github.com/cschroeter/ts-strictify/commit/ddf9da2898ac206a85ce5ee9809110ec721dd6dd))
+
 ## [1.4.1](https://github.com/cschroeter/ts-strictify/compare/v1.4.0...v1.4.1) (2020-02-10)
 
 
