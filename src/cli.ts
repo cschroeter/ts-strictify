@@ -49,17 +49,10 @@ const run = async (): Promise<void> => {
   const result = await strictify({
     gitOptions,
     typeScriptOptions,
-    onFoundSinceRevision: (revision) => {
-      revision
-        ? console.log(
-            `🔍  Finding changed files since ${chalk.bold('git')} revision ${chalk.bold(revision)}`,
-          )
-        : console.log(
-            `⚠️  Can not find commit at which the current branch was forked from ${chalk.bold(
-              gitOptions.targetBranch,
-            )}. Does target branch ${chalk.bold(gitOptions.targetBranch)} exists?`,
-          )
-    },
+    onFoundSinceRevision: (revision) =>
+      console.log(
+        `🔍  Finding changed files since ${chalk.bold('git')} revision ${chalk.bold(revision)}`,
+      ),
     onFoundChangedFiles: (changedFiles) => {
       console.log(
         `🎯  Found ${chalk.bold(String(changedFiles.length))} changed ${
