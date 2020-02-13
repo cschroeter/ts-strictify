@@ -9,7 +9,7 @@ import { relative } from 'path'
 export interface Args {
   typeScriptOptions: TypeScriptOptions
   gitOptions: GitOptions
-  onFoundSinceRevision: (revision: string | undefined) => void
+  onFoundSinceRevision: (revision: string) => void
   onFoundChangedFiles: (changedFiles: string[]) => void
   onExamineFile: (file: string) => void
   onCheckFile: (file: string, hasErrors: boolean) => void

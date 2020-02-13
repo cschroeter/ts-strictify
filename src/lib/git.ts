@@ -14,10 +14,15 @@ export interface GitOptions {
 
 export const findCommitAtWhichTheCurrentBranchForkedFromTargetBranch = async (
   targetBranch: string,
-): Promise<string | undefined> => {
+): Promise<string> => {
   return execa('git', ['merge-base', '--fork-point', targetBranch])
     .then((resposne) => resposne.stdout)
-    .catch(() => undefined)
+    .catch(() => {
+      console.error(
+        `Error: Can not find commit at which the current branch was forked from. Does target branch ${targetBranch} exists?`,
+      )
+      process.exit(1)
+    })
 }
 
 export const findGitRootDir = async (): Promise<string> => {
