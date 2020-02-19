@@ -70,6 +70,7 @@ const run = async (): Promise<void> => {
   })
 
   if (result.errors) {
+    console.log(`💥  ${result.errors} errors found`);
     process.exit(1)
   } else {
     console.log(`🎉  ${chalk.green('All files passed')}`)
