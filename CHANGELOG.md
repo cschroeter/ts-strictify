@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/cschroeter/ts-strictify/compare/v1.5.1...v1.5.2) (2020-03-25)
+
+
+### Bug Fixes
+
+* **bug:** 'noImplicitUseStrict cannot be specified with option' error ([1930a55](https://github.com/cschroeter/ts-strictify/commit/1930a5554f021401f75ab8c4c8bee5b7d368fdfb))
+
 ## [1.5.1](https://github.com/cschroeter/ts-strictify/compare/v1.5.0...v1.5.1) (2020-03-25)
 
 
