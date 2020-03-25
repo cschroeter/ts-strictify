@@ -3,6 +3,7 @@ import execa from 'execa'
 export interface TypeScriptOptions {
   noImplicitAny: boolean
   noImplicitThis: boolean
+  noImplicitUseStrict: boolean
   alwaysStrict: boolean
   strictBindCallApply: boolean
   strictNullChecks: boolean
