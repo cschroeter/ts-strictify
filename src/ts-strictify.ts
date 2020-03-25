@@ -1,15 +1,10 @@
-import {
-  GitOptions,
-  findChangedFiles,
-  findCommitAtWhichTheCurrentBranchForkedFromTargetBranch,
-} from './lib/git'
+import { GitOptions, findChangedFiles } from './lib/git'
 import { TypeScriptOptions, compile } from './lib/typescript'
 import { relative } from 'path'
 
 export interface Args {
   typeScriptOptions: TypeScriptOptions
   gitOptions: GitOptions
-  onFoundSinceRevision: (revision: string) => void
   onFoundChangedFiles: (changedFiles: string[]) => void
   onExamineFile: (file: string) => void
   onCheckFile: (file: string, hasErrors: boolean) => void
@@ -21,18 +16,7 @@ export interface StrictifyResult {
 }
 
 export const strictify = async (args: Args): Promise<StrictifyResult> => {
-  const {
-    onFoundSinceRevision,
-    onFoundChangedFiles,
-    onCheckFile,
-    typeScriptOptions,
-    gitOptions,
-  } = args
-
-  const commit = await findCommitAtWhichTheCurrentBranchForkedFromTargetBranch(
-    gitOptions.targetBranch,
-  )
-  onFoundSinceRevision(commit)
+  const { onFoundChangedFiles, onCheckFile, typeScriptOptions, gitOptions } = args
 
   const changedFiles = await findChangedFiles(gitOptions).then((files) =>
     files.filter((fileName) => Boolean(fileName.match(/\.tsx?$/))),

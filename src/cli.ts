@@ -49,10 +49,6 @@ const run = async (): Promise<void> => {
   const result = await strictify({
     gitOptions,
     typeScriptOptions,
-    onFoundSinceRevision: (revision) =>
-      console.log(
-        `🔍  Finding changed files since ${chalk.bold('git')} revision ${chalk.bold(revision)}`,
-      ),
     onFoundChangedFiles: (changedFiles) => {
       console.log(
         `🎯  Found ${chalk.bold(String(changedFiles.length))} changed ${
