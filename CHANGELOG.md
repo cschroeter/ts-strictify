@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/cschroeter/ts-strictify/compare/v1.5.0...v1.5.1) (2020-03-25)
+
+
+### Bug Fixes
+
+* remove onFoundSinceRevision due to issues with some CI pipelines ([d6f74e0](https://github.com/cschroeter/ts-strictify/commit/d6f74e03f6e3a8e2b0d5b67147cbd9c1a419af97))
+
 # [1.5.0](https://github.com/cschroeter/ts-strictify/compare/v1.4.1...v1.5.0) (2020-02-13)
 
 
