@@ -9,6 +9,7 @@ const run = async (): Promise<void> => {
     .options({
       noImplicitAny: { type: 'boolean', default: true },
       noImplicitThis: { type: 'boolean', default: true },
+      noImplicitUseStrict: { type: 'boolean', default: false },
       alwaysStrict: { type: 'boolean', default: true },
       strictBindCallApply: { type: 'boolean', default: true },
       strictNullChecks: { type: 'boolean', default: true },
@@ -29,6 +30,7 @@ const run = async (): Promise<void> => {
   const typeScriptOptions = pick(argv, [
     'noImplicitAny',
     'noImplicitThis',
+    'noImplicitUseStrict',
     'alwaysStrict',
     'strictBindCallApply',
     'strictNullChecks',
@@ -66,7 +68,7 @@ const run = async (): Promise<void> => {
   })
 
   if (result.errors) {
-    console.log(`💥  ${result.errors} errors found`);
+    console.log(`💥  ${result.errors} errors found`)
     process.exit(1)
   } else {
     console.log(`🎉  ${chalk.green('All files passed')}`)
