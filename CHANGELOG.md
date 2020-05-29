@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/cschroeter/ts-strictify/compare/v1.5.2...v1.5.3) (2020-05-29)
+
+
+### Bug Fixes
+
+* **tsc:** prefer local binary ([6730f46](https://github.com/cschroeter/ts-strictify/commit/6730f462219b44dbc8a0b7281bb1e161df5307de))
+
 ## [1.5.2](https://github.com/cschroeter/ts-strictify/compare/v1.5.1...v1.5.2) (2020-03-25)
 
 
