@@ -17,8 +17,19 @@ export const isFlagSupported = (flag: string, helpOutput: string): boolean => {
 }
 
 export const compile = async (options: TypeScriptOptions): Promise<string[]> => {
+  let flagSupported: (flag: string) => boolean = () => true
+  try {
+    const { all: helpOutput } = await execa('tsc', ['--help'], { all: true, preferLocal: true })
+    if (helpOutput !== undefined) {
+      flagSupported = (flag: string): boolean => isFlagSupported(flag, helpOutput)
+    }
+  } catch (error) {
+    // hope we are on a recent tsc
+  }
+
   const args = Object.entries(options)
     .map(([key, value]) => [key.replace(/^/, '--'), value])
+    .filter(([key, _value]) => flagSupported(key))
     .reduce<string[]>((result, [key, value]) => [...result, key, value], [])
 
   let tscOutput: string[] = []
