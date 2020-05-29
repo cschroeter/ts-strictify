@@ -12,6 +12,10 @@ export interface TypeScriptOptions {
   noEmit: boolean
 }
 
+export const isFlagSupported = (flag: string, helpOutput: string): boolean => {
+  return helpOutput.includes(flag)
+}
+
 export const compile = async (options: TypeScriptOptions): Promise<string[]> => {
   const args = Object.entries(options)
     .map(([key, value]) => [key.replace(/^/, '--'), value])
