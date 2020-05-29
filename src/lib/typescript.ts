@@ -19,7 +19,7 @@ export const compile = async (options: TypeScriptOptions): Promise<string[]> => 
 
   let tscOutput: string[] = []
   try {
-    await execa('tsc', args, { all: true })
+    await execa('tsc', args, { all: true, preferLocal: true })
   } catch (error) {
     const { all } = error
     tscOutput = (all as string).split('\n')
