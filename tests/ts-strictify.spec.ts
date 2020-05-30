@@ -19,7 +19,13 @@ const runTsStrictifyInPath = async (
     .reduce<string[]>((result, [key, value]) => [...result, key.toString(), value.toString()], [])
 
   process.chdir(path)
-  return execa('node', [tsStrictify, ...args])
+  return execa('node', [tsStrictify, ...args], {
+    env: {
+      //the assertions break in an environment that supports color
+      //override chalk color detection https://github.com/chalk/supports-color/blob/master/index.js
+      FORCE_COLOR: 'false',
+    },
+  })
     .then((response) => response.stdout)
     .catch((error) => error.stdout)
     .finally(() => process.chdir(cwd))
