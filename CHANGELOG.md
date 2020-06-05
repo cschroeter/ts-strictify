@@ -1,3 +1,16 @@
+# [1.6.0](https://github.com/cschroeter/ts-strictify/compare/v1.5.3...v1.6.0) (2020-06-05)
+
+
+### Bug Fixes
+
+* disable chalk color coding in test ([3fe254b](https://github.com/cschroeter/ts-strictify/commit/3fe254b98b40b6fc32a528f93ab4be2473c6be34))
+
+
+### Features
+
+* **old-tsc:** filter used flags based on tsc help output ([0040daa](https://github.com/cschroeter/ts-strictify/commit/0040daa6d8accdf195003495dd83955f1d7dcc7d))
+* **old-tsc:** function to check if a flag is supported ([9ffe876](https://github.com/cschroeter/ts-strictify/commit/9ffe876cd60fcd5784ce3e9db5e0170a05b2873c))
+
 ## [1.5.3](https://github.com/cschroeter/ts-strictify/compare/v1.5.2...v1.5.3) (2020-05-29)
 
 
