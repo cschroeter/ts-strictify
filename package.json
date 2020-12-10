@@ -33,7 +33,7 @@
     "yargs": "^15.3.0"
   },
   "peerDependencies": {
-    "typescript": "3.x"
+    "typescript": ">3"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
