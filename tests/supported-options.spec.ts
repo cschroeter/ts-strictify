@@ -43,3 +43,7 @@ test('support for --strictFunctionTypes', () => {
 test('support for --strictBindCallApply', () => {
   expectToBeSupportedSince('3.2.1', 'strictBindCallApply')
 })
+
+test('support for --noUncheckedIndexedAccess', () => {
+  expectToBeSupportedSince('4.1.2', 'noUncheckedIndexedAccess')
+})

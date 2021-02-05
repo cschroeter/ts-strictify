@@ -88,6 +88,7 @@ Options:
   --strictNullChecks                              [boolean] [default: true]
   --strictFunctionTypes                           [boolean] [default: true]
   --strictPropertyInitialization                  [boolean] [default: true]
+  --noUncheckedIndexedAccess                      [boolean] [default: true]
   --noEmit                                        [boolean] [default: true]
   --targetBranch                               [string] [default: "master"]
   --commitedFiles                                 [boolean] [default: true]

@@ -2,6 +2,7 @@ import simpleGit from 'simple-git/promise'
 import tmp from 'tmp-promise'
 import { TypeScriptOptions } from '../src/lib/typescript'
 import { GitOptions } from '../src/lib/git'
+import fs from 'fs'
 
 import execa from 'execa'
 import { join } from 'path'
@@ -13,6 +14,9 @@ const runTsStrictifyInPath = async (
 ): Promise<string> => {
   const cwd = process.cwd()
   const tsStrictify = join(cwd, 'dist/cli.js')
+  if (!fs.existsSync(tsStrictify)) {
+    throw new Error('You must build ts-strictify with "yarn build" before running tests')
+  }
 
   const args = Object.entries(options)
     .map(([key, value]) => [key.replace(/^/, '--'), value])

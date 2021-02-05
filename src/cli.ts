@@ -15,6 +15,7 @@ const run = async (): Promise<void> => {
       strictNullChecks: { type: 'boolean', default: true },
       strictFunctionTypes: { type: 'boolean', default: true },
       strictPropertyInitialization: { type: 'boolean', default: true },
+      noUncheckedIndexedAccess: { type: 'boolean', default: true },
       noEmit: { type: 'boolean', default: true },
       targetBranch: { type: 'string', default: 'master' },
       commitedFiles: { type: 'boolean', default: true },
@@ -36,6 +37,7 @@ const run = async (): Promise<void> => {
     'strictNullChecks',
     'strictFunctionTypes',
     'strictPropertyInitialization',
+    'noUncheckedIndexedAccess',
     'noEmit',
   ])
 
