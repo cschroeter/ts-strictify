@@ -9,6 +9,7 @@ export interface TypeScriptOptions {
   strictNullChecks: boolean
   strictFunctionTypes: boolean
   strictPropertyInitialization: boolean
+  noUncheckedIndexedAccess: boolean
   noEmit: boolean
 }
 
