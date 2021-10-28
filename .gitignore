@@ -138,3 +138,7 @@ dist
 
 .idea
 # End of https://www.gitignore.io/api/node,macos,visualstudiocode
+
+# Ignore lock files - because this is a lib
+package-lock.json
+yarn.lock
