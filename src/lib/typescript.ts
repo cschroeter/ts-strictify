@@ -19,7 +19,7 @@ export const isFlagSupported = (flag: string, helpOutput: string): boolean => {
 export const compile = async (options: TypeScriptOptions): Promise<string[]> => {
   let flagSupported: (flag: string) => boolean = () => true
   try {
-    const { all: helpOutput } = await execa('tsc', ['--help'], { all: true, preferLocal: true })
+    const { all: helpOutput } = await execa('tsc', ['--help', '--all'], { all: true, preferLocal: true })
     if (helpOutput !== undefined) {
       flagSupported = (flag: string): boolean => isFlagSupported(flag, helpOutput)
     }
